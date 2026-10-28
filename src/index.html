@@ -1,0 +1,1186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>CodeMap · Repository map</title>
+<style>
+:root{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color-scheme:dark;--bg:#1e1e1e;--panel:#262626;--panel-2:#303030;--field:#242424;--line:#6e6e6e;--line-soft:#414141;--text:#f1f1f1;--muted:#c2c2c2;--quiet:#9a9a9a;--accent:#b8bec4;--accent-strong:#e1e1e1;--selected:#f5f5f5;--canvas:#202020;--tile:#292929;--ok:#3fb950;--danger:#ff7b72;--shadow:0 12px 30px #0005}
+:root[data-theme="light"]{color-scheme:light;--bg:#f2f2f0;--panel:#fff;--panel-2:#f5f5f3;--field:#fff;--line:#8b8b88;--line-soft:#d3d3d0;--text:#222;--muted:#4b4b48;--quiet:#666662;--accent:#555;--accent-strong:#222;--selected:#222;--canvas:#ededeb;--tile:#f5f5f3;--ok:#1a7f37;--danger:#cf222e;--shadow:0 12px 30px #1f23281a}
+*{box-sizing:border-box}html{min-width:0;background:var(--bg)}body{margin:0;background:var(--bg);color:var(--text);font-size:14px;line-height:1.45}button,input,select{font:inherit;color:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,[tabindex="0"]:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.5}.shell{max-width:1680px;margin:0 auto;padding:20px 28px 36px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line-soft);padding:3px 0 17px}.brand{display:flex;align-items:center;gap:10px;min-width:0}.brand-name{font-size:12px;font-weight:750;letter-spacing:.16em;text-transform:uppercase}.brand-sub{margin-left:10px;padding-left:11px;border-left:1px solid var(--line);color:var(--muted);font:12px ui-monospace,SFMono-Regular,Consolas,monospace}.top-meta{display:flex;align-items:center;gap:12px;color:var(--muted);font:12px ui-monospace,SFMono-Regular,Consolas,monospace}.status-dot{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.intro{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:22px 0 17px}.eyebrow{color:var(--accent-strong);font:700 10px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.13em;text-transform:uppercase}.intro h1{font-size:clamp(22px,3vw,32px);line-height:1.15;letter-spacing:-.035em;margin:5px 0 6px}.repo-path{max-width:min(64vw,880px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font:12px ui-monospace,SFMono-Regular,Consolas,monospace}.summary{display:flex;gap:18px;flex-wrap:wrap;justify-content:flex-end}.summary-item{min-width:70px;text-align:right}.summary-value{display:block;font:600 17px ui-monospace,SFMono-Regular,Consolas,monospace;font-variant-numeric:tabular-nums}.summary-label{color:var(--quiet);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.controls{display:grid;grid-template-columns:minmax(250px,1.3fr) minmax(230px,1fr) minmax(240px,1.1fr) auto;gap:10px;align-items:end;border:1px solid var(--line);border-radius:7px;background:var(--panel);padding:12px}.control{min-width:0}.control-label{display:block;margin:0 0 6px;color:var(--muted);font:700 10px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.1em;text-transform:uppercase}.search-wrap{position:relative}.search-icon{position:absolute;left:11px;top:10px;color:var(--quiet);font-size:14px;pointer-events:none}.field{width:100%;height:36px;border:1px solid var(--line);border-radius:5px;background:var(--field);padding:0 10px;color:var(--text)}.search-field{padding-left:33px}.field::placeholder{color:var(--quiet);opacity:1}.field option{background:var(--panel);color:var(--text)}.segments{display:flex;min-height:36px;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--field)}.segments button{flex:1;min-width:0;border:0;border-right:1px solid var(--line-soft);background:transparent;color:var(--muted);padding:0 10px;font-size:12px;white-space:nowrap}.segments button:last-child{border-right:0}.segments button[aria-pressed="true"]{background:var(--panel-2);color:var(--text);box-shadow:inset 0 -2px 0 var(--accent)}.depth-control{display:flex;align-items:center;gap:10px;height:36px}.depth-control input{width:100%;accent-color:var(--accent)}.depth-value{min-width:40px;color:var(--text);font:12px ui-monospace,SFMono-Regular,Consolas,monospace;text-align:right}.mode-switches{display:grid;gap:8px}.mode-switches .segments{min-width:178px}.mode-switches .segments button{padding:0 8px}.filter-row{display:grid;grid-template-columns:minmax(120px,1fr) minmax(120px,1fr);gap:8px}.filter-note{margin:6px 0 0;color:var(--quiet);font-size:11px;min-height:16px}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) 292px;gap:14px;margin-top:14px;align-items:stretch}.map-panel,.inspector{border:1px solid var(--line);border-radius:7px;background:var(--panel);min-width:0}.map-panel{padding:14px}.map-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:12px}.map-heading h2,.inspector h2{margin:0;font-size:12px;letter-spacing:.09em;text-transform:uppercase}.map-heading small{color:var(--quiet);font:11px ui-monospace,SFMono-Regular,Consolas,monospace}.map-tools{display:flex;justify-content:flex-end;gap:7px}.export-menu{position:relative}.export-menu>summary{display:grid;place-items:center;list-style:none;width:40px;min-height:36px;padding:0}.export-menu>summary::-webkit-details-marker{display:none}.more-icon{font-size:22px;line-height:1;letter-spacing:.08em;transform:translateY(-3px)}.export-options{position:absolute;top:calc(100% + 7px);right:0;z-index:5;display:grid;min-width:148px;gap:2px;padding:5px;border:1px solid var(--line);border-radius:5px;background:var(--panel);box-shadow:var(--shadow)}.export-options button{min-height:38px;border:0;border-radius:3px;background:transparent;padding:0 10px;color:var(--text);text-align:left;font-size:12px}.export-options button:hover{background:var(--panel-2)}.button{min-height:34px;border:1px solid var(--line);border-radius:5px;background:var(--panel-2);padding:0 11px;color:var(--text);font-size:12px;font-weight:650}.button:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--panel-2))}.button.primary{border-color:var(--accent);background:var(--accent);color:#07111e}.button.primary:hover{background:var(--accent-strong)}.map-capture{position:relative;min-height:380px;height:min(62vh,760px);overflow:hidden;border:1px solid var(--line);border-radius:5px;background:var(--canvas)}.map-label{position:absolute;z-index:1;left:14px;top:10px;display:flex;align-items:center;gap:8px;max-width:calc(100% - 28px)}.path-input{min-width:0;width:min(440px,calc(100vw - 180px));height:27px;border:1px solid transparent;border-radius:3px;background:color-mix(in srgb,var(--canvas) 84%,transparent);padding:2px 6px;color:var(--text);font:600 11px ui-monospace,SFMono-Regular,Consolas,monospace}.path-input:hover,.path-input:focus{border-color:var(--line);outline-color:var(--accent)}.label-color{width:28px;height:26px;border:1px solid var(--line);border-radius:4px;background:var(--panel);padding:3px;cursor:pointer}.label-color::-webkit-color-swatch-wrapper{padding:0}.label-color::-webkit-color-swatch{border:0;border-radius:2px}.label-color::-moz-color-swatch{border:0;border-radius:2px}#treemap{display:block;width:100%;height:100%}.tile{cursor:pointer}.tile rect{vector-effect:non-scaling-stroke;transition:stroke-width .12s ease}.tile:hover rect,.tile:focus rect{stroke:var(--selected)!important;stroke-width:2px!important}.tile.selected rect{stroke:var(--selected)!important;stroke-width:2px!important}.tile-label{pointer-events:none;fill:var(--text);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;font-weight:600}.tile-sub{pointer-events:none;fill:var(--muted);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:9px}.folder-label{pointer-events:none;fill:var(--text);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:10px;font-weight:700}.empty-map{fill:var(--muted);font:13px ui-sans-serif,system-ui,sans-serif}.map-foot{display:flex;justify-content:space-between;gap:12px;padding:9px 1px 0;color:var(--muted);font-size:11px}.map-foot strong{color:var(--text);font-weight:650}.legend{display:flex;gap:13px;flex-wrap:wrap;margin-top:10px;min-height:18px;color:var(--muted);font-size:11px}.legend-item{display:inline-flex;align-items:center;gap:6px}.legend-dot{width:9px;height:9px;border-radius:2px;border:1.5px solid currentColor;background:transparent;display:inline-block}.inspector{padding:15px;display:flex;flex-direction:column;gap:13px}.inspector-title{display:flex;align-items:center;justify-content:space-between;gap:10px}.kind-label{padding:3px 6px;border:1px solid var(--line);border-radius:3px;color:var(--muted);font:10px ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase}.selected-name{margin:0;font:650 16px/1.3 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}.selected-path{margin:-7px 0 0;color:var(--muted);font:11px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}.language-row{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}.language-chip{width:9px;height:9px;flex:none;border-radius:2px;background:#8b949e}.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.stat{border:1px solid var(--line-soft);border-radius:4px;padding:8px 9px;background:var(--panel-2)}.stat-value{display:block;font:600 14px ui-monospace,SFMono-Regular,Consolas,monospace;font-variant-numeric:tabular-nums}.stat-label{display:block;margin-top:2px;color:var(--quiet);font-size:10px}.detail-list{display:grid;gap:7px;border-top:1px solid var(--line-soft);padding-top:11px}.detail-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;color:var(--muted);font-size:11px}.detail-row strong{color:var(--text);font:600 11px ui-monospace,SFMono-Regular,Consolas,monospace;text-align:right;overflow-wrap:anywhere}.open-folder{width:100%;margin-top:auto}.breadcrumbs{display:flex;align-items:center;gap:7px;min-width:0;overflow-x:auto;padding:1px 0 10px;white-space:nowrap}.crumb{border:0;background:transparent;padding:2px 0;color:var(--muted);font:11px ui-monospace,SFMono-Regular,Consolas,monospace}.crumb:hover{color:var(--accent-strong);text-decoration:underline}.crumb[aria-current="page"]{color:var(--text);font-weight:700}.crumb-sep{color:var(--quiet);font:11px ui-monospace,SFMono-Regular,Consolas,monospace}.notice{margin-top:12px;padding:9px 11px;border:1px solid var(--line-soft);border-radius:5px;color:var(--muted);font-size:11px}.notice[hidden]{display:none}.status{position:fixed;right:18px;bottom:18px;z-index:5;max-width:min(420px,calc(100vw - 36px));padding:10px 13px;border:1px solid var(--line);border-radius:5px;background:var(--panel);box-shadow:var(--shadow);color:var(--text);font-size:12px}.status[hidden]{display:none}.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.loading-state{margin:16px 0;padding:11px 13px;border:1px solid var(--line);border-radius:5px;background:var(--panel);color:var(--muted);font-size:12px}.loading-state[hidden]{display:none}
+@media(max-width:1120px){.controls{grid-template-columns:1fr 1fr}.mode-switches{grid-template-columns:1fr 1fr}.workspace{grid-template-columns:minmax(0,1fr) 260px}.map-capture{height:56vh}}
+@media(max-width:820px){.shell{padding:14px 16px 28px}.intro{align-items:flex-start;flex-direction:column}.summary{justify-content:flex-start}.summary-item{text-align:left}.workspace{grid-template-columns:1fr}.inspector{display:grid;grid-template-columns:1fr 1fr;align-items:start}.inspector-title,.selected-name,.selected-path,.language-row,.detail-list,.open-folder{grid-column:1/-1}.stats-grid{grid-column:1/-1}.map-capture{height:54vh;min-height:340px}}
+@media(max-width:560px){.shell{padding:11px 10px 24px}.topbar{align-items:flex-start;flex-wrap:wrap}.top-meta{font-size:10px}.brand-sub{display:none}.intro{padding-top:18px}.controls{grid-template-columns:1fr;padding:10px}.field,.segments,.depth-control{min-height:44px;height:44px}.segments button{min-height:44px;white-space:normal;font-size:11px;padding:3px 5px}.filter-row,.mode-switches{grid-template-columns:1fr}.mode-switches .segments{min-width:0}.workspace{margin-top:10px}.map-panel{padding:10px}.map-heading{align-items:flex-start;flex-direction:column}.map-tools{width:100%;justify-content:flex-end}.export-menu>summary{width:44px;height:44px}.map-capture{min-height:300px;height:50vh}.map-foot{flex-direction:column;gap:3px}.inspector{padding:12px;grid-template-columns:1fr}.inspector-title,.selected-name,.selected-path,.language-row,.detail-list,.open-folder,.stats-grid{grid-column:1}.summary{gap:14px}.summary-value{font-size:15px}.path-input{height:36px;width:calc(100vw - 102px);font-size:10px}.label-color{width:40px;height:40px;flex:none}.crumb{min-height:44px}}
+@media(max-width:560px){.button,.path-input,.label-color{min-height:44px}.label-color{width:44px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+.controls{display:grid;grid-template-columns:minmax(180px,1fr) auto;grid-template-rows:auto auto;align-items:center;gap:4px 14px;padding:10px 12px}
+.controls-search{grid-row:1/3;min-width:0}.controls-search .search-wrap{max-width:720px}.controls-search .field{height:40px}.filter-note{min-height:15px;margin:3px 0 0 2px;color:var(--quiet);font-size:11px}
+.control-actions{display:flex;align-items:center;gap:8px}.control-menu{position:relative;min-width:88px}.control-menu>summary{display:flex;align-items:center;justify-content:center;gap:7px;min-height:40px;border:1px solid var(--line);border-radius:5px;background:var(--panel-2);padding:0 13px;color:var(--text);font-size:12px;font-weight:650;list-style:none;cursor:pointer}.control-menu>summary::-webkit-details-marker{display:none}.control-menu[open]>summary{border-color:var(--accent);background:var(--field)}.filter-count{display:grid;place-items:center;min-width:17px;height:17px;border-radius:9px;background:var(--accent);padding:0 4px;color:#07111e;font-size:10px;font-weight:750}.filter-count[hidden]{display:none}
+.control-popover{position:absolute;top:calc(100% + 7px);right:0;z-index:8;display:grid;gap:11px;width:min(320px,calc(100vw - 32px));padding:14px;border:1px solid var(--line);border-radius:7px;background:var(--panel);box-shadow:var(--shadow)}.filter-popover{grid-template-columns:1fr}.view-popover{grid-template-columns:1fr 1fr}.menu-field{display:grid;gap:5px;color:var(--muted);font-size:11px}.menu-field .field{height:40px}.tile-label{fill:var(--tile-foreground,var(--text))}.tile-sub{fill:var(--tile-foreground,var(--muted));opacity:.82}.legend-dot{border:0;background:currentColor}
+@media(max-width:560px){.controls{grid-template-columns:1fr;grid-template-rows:auto auto;gap:9px;padding:10px}.controls-search{grid-row:auto}.controls-search .search-wrap{max-width:none}.controls-search .field{height:44px}.control-actions{width:100%;gap:8px}.control-menu{flex:1}.control-menu>summary{min-height:44px}.control-menu:first-child .control-popover{left:0;right:auto}.control-menu:last-child .control-popover{right:0;left:auto}.control-popover{width:min(340px,calc(100vw - 32px));padding:12px}.menu-field .field{height:44px}.filter-note{font-size:10px}}
+.shell{padding-top:15px}
+.topbar{display:grid;grid-template-columns:auto minmax(180px,1fr) auto;gap:24px;padding-bottom:13px}
+.navbar-search{width:min(620px,100%);justify-self:center;min-width:0}
+.theme-switch{min-width:112px;height:40px;justify-self:end}
+.theme-switch button{min-width:54px;font-size:11px}
+.search-wrap{display:flex;align-items:center;gap:5px;min-height:42px;border:1px solid var(--line);border-radius:5px;background:var(--field);padding:0 7px 0 11px}
+.search-wrap:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.search-icon{position:static;flex:none;color:var(--muted);font-size:19px;line-height:1}
+.search-field{height:40px;min-width:0;border:0;background:transparent;padding:0 5px;color:var(--text)}
+.search-field:focus-visible{outline:0}
+.filter-menu{position:relative;flex:none;min-width:0}
+.filter-menu>summary{list-style:none}
+.filter-menu>summary::-webkit-details-marker{display:none}
+.control-menu.filter-menu>summary{display:grid;place-items:center;width:37px;min-height:34px;border:0;border-left:1px solid var(--line-soft);border-radius:0;background:transparent;padding:0;font-weight:400}
+.control-menu.filter-menu[open]>summary{border-color:var(--line-soft);background:transparent}
+.filter-trigger{display:grid;place-items:center;width:37px;height:34px;border-left:1px solid var(--line-soft);color:var(--muted);cursor:pointer}
+.filter-trigger svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-width:1.6}
+.filter-menu[open] .filter-trigger{color:var(--accent-strong)}
+.filter-menu .control-popover{top:calc(100% + 8px);right:0}
+.filter-count{position:absolute;top:0;right:0;min-width:15px;height:15px;border:2px solid var(--field);font-size:9px}
+.intro{align-items:center;gap:24px;padding:23px 0 18px}
+.title-editor{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+.title-block{flex:1;min-width:0}
+.repo-location{min-width:0;margin:0;color:var(--muted);font:12px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}
+.intro h1{flex:1;min-width:0;margin:0;font-size:clamp(26px,3vw,34px);line-height:1.15;letter-spacing:-.035em}
+.repo-title{display:block;width:100%;height:1.2em;min-width:0;border:1px solid transparent;border-radius:3px;background:transparent;padding:0;color:inherit;font:inherit;letter-spacing:inherit;line-height:inherit;white-space:nowrap;text-overflow:ellipsis}
+.repo-title:hover,.repo-title:focus{border-color:var(--line-soft)}
+.title-color{width:31px;height:31px;flex:none;border:1px solid var(--line);border-radius:4px;background:var(--panel);padding:3px;cursor:pointer}
+.title-color::-webkit-color-swatch-wrapper{padding:0}
+.title-color::-webkit-color-swatch{border:0;border-radius:2px}
+.title-color::-moz-color-swatch{border:0;border-radius:2px}
+.title-color[hidden]{display:none}
+.summary{gap:14px;flex:none}
+.summary-item{min-width:56px}
+.summary-value{font-size:15px}
+.summary-label{font-size:9px}
+.workspace{margin-top:2px}
+.map-panel{padding:11px}
+.map-heading{min-height:35px;justify-content:space-between;padding:0 0 9px}
+.map-tools{align-items:center}
+.map-location{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+.up-folder{min-width:40px;min-height:40px;padding:0}
+.up-folder svg,.theme-switch svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8}
+.theme-switch{min-width:92px;width:92px;height:44px;justify-self:end}
+.theme-switch button{display:grid;place-items:center;min-width:44px;min-height:44px;padding:0}
+.visible-depth{display:grid;gap:5px;border-top:1px solid var(--line-soft);padding:10px 0 2px}
+.visible-depth .menu-field{gap:7px;color:var(--muted);font-size:12px;font-weight:650}
+.visible-depth .depth-control{height:38px}
+.visible-depth .depth-control input{min-width:0}
+.depth-note{color:var(--quiet);font-size:10px}
+.view-menu{position:relative;min-width:0}
+.view-menu>summary{width:40px;min-height:40px;padding:0}
+.view-menu>summary svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.7}
+.view-menu[open]>summary{border-color:var(--accent);background:var(--field)}
+.view-menu .view-popover{grid-template-columns:repeat(2,minmax(0,1fr));width:min(360px,calc(100vw - 32px))}
+.view-popover .visible-depth{grid-column:1/-1;border-top:1px solid var(--line-soft);padding:7px 0 0}
+.depth-control{height:38px}
+.depth-control input[type="range"]{min-width:0;flex:1;height:24px}
+.depth-control input[type="number"]{width:76px;height:36px;padding:0 7px;text-align:center;font:12px ui-monospace,SFMono-Regular,Consolas,monospace}
+.depth-value{white-space:nowrap}
+.tile-tooltip{position:absolute;z-index:4;max-width:min(270px,calc(100% - 16px));border:1px solid var(--line);border-radius:5px;background:var(--panel);padding:10px 11px;box-shadow:var(--shadow);pointer-events:none}
+.tile-tooltip[hidden]{display:none}
+.tile-tooltip-name{display:block;overflow-wrap:anywhere;font:650 12px/1.35 ui-monospace,SFMono-Regular,Consolas,monospace}
+.tile-tooltip-path{display:block;margin-top:2px;color:var(--muted);overflow-wrap:anywhere;font:10px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace}
+.tile-tooltip-grid{display:grid;grid-template-columns:auto auto;gap:3px 16px;margin-top:8px;font-size:10px}
+.tile-tooltip-grid span{color:var(--muted)}
+.tile-tooltip-grid strong{color:var(--text);font:600 10px ui-monospace,SFMono-Regular,Consolas,monospace;text-align:right}
+.section-heading{margin:3px 0 -6px;color:var(--quiet);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.detail-list{gap:8px}
+.detail-row{padding-bottom:6px;border-bottom:1px solid var(--line-soft)}
+.detail-row:last-child{border-bottom:0;padding-bottom:0}
+.export-menu>summary{width:38px;min-height:36px}
+.map-capture{height:min(68vh,820px);min-height:380px}
+.filter-note{position:absolute!important}
+@media(max-width:1120px){.topbar{grid-template-columns:auto minmax(160px,1fr) auto;gap:15px}.navbar-search{justify-self:stretch}.summary{gap:10px}.summary-item{min-width:48px}}
+@media(max-width:820px){.shell{padding-right:16px;padding-left:16px}.topbar{grid-template-columns:auto minmax(0,1fr) auto;gap:12px}.navbar-search{justify-self:stretch;width:100%}.intro{align-items:flex-start;flex-direction:column;gap:13px;padding:20px 0 15px}.title-block,.title-editor{width:100%}.summary{justify-content:flex-start}.summary-item{text-align:left}.workspace{margin-top:2px}.map-capture{height:58vh;min-height:360px}}
+@media(max-width:560px){.shell{padding:10px 11px 24px}.topbar{grid-template-columns:minmax(0,1fr) auto;gap:10px;padding-bottom:10px}.theme-switch{grid-column:2;grid-row:1;min-width:92px;width:92px;height:44px}.navbar-search{grid-column:1/-1;grid-row:2;width:100%}.search-wrap{min-height:44px}.search-field{height:42px}.filter-trigger{width:39px;height:36px}.control-menu.filter-menu>summary{width:39px;min-height:36px}.filter-menu .control-popover{left:0;right:0;width:100%}.intro{gap:12px;padding:17px 0 13px}.intro h1{font-size:clamp(24px,7vw,30px)}.repo-location{font-size:10px;overflow-wrap:anywhere}.map-location{gap:8px}.summary{gap:16px}.summary-item{min-width:0}.summary-value{font-size:14px}.workspace{grid-template-columns:minmax(0,1fr);gap:10px}.map-panel{position:relative;padding:9px}.map-heading{min-height:44px;align-items:center;flex-direction:row}.map-tools{width:auto;justify-content:flex-end}.map-capture{height:55vh;min-height:320px}.map-foot{font-size:10px}.inspector{display:flex;gap:12px;padding:12px}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.view-menu{position:static}.view-menu>summary,.map-tools .button,.export-menu>summary{min-height:44px}.view-menu>summary,.export-menu>summary{width:44px}.view-menu .view-popover{top:58px;right:9px;width:min(360px,calc(100vw - 40px));grid-template-columns:1fr 1fr}.up-folder{min-width:44px;min-height:44px}.depth-control input[type="number"]{width:72px}}
+.legend-dot{border:0;background:currentColor}.legend-more{color:var(--quiet);font-variant-numeric:tabular-nums}.language-composition{border-top:1px solid var(--line-soft);padding-top:11px}.language-composition>summary{display:flex;align-items:center;justify-content:space-between;gap:10px;list-style:none;cursor:pointer;color:var(--text);font-size:12px;font-weight:650}.language-composition>summary::-webkit-details-marker{display:none}.language-composition>summary::after{content:"+";color:var(--quiet);font-size:16px;font-weight:400}.language-composition[open]>summary::after{content:"−"}.composition-total{margin-left:auto;color:var(--quiet);font:10px ui-monospace,SFMono-Regular,Consolas,monospace;font-weight:400}.composition-controls{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:11px 0 7px;color:var(--muted);font-size:11px}.composition-controls .field{width:auto;min-width:102px;height:32px;padding:0 8px;font-size:11px}.composition-list{display:grid;gap:9px;max-height:210px;overflow:auto;padding:2px 4px 2px 0;overscroll-behavior:contain;scrollbar-color:var(--line) transparent;scrollbar-width:thin}.composition-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 8px;align-items:center;min-width:0}.composition-language{display:flex;align-items:center;gap:7px;min-width:0;color:var(--muted);font-size:11px}.composition-swatch{width:8px;height:8px;flex:none;border-radius:2px;background:var(--language-color)}.composition-value{color:var(--text);font:10px ui-monospace,SFMono-Regular,Consolas,monospace;font-variant-numeric:tabular-nums}.composition-track{grid-column:1/-1;height:3px;overflow:hidden;border-radius:2px;background:var(--line-soft)}.composition-fill{display:block;height:100%;border-radius:inherit;background:var(--language-color)}.composition-empty{padding:8px 0;color:var(--quiet);font-size:11px}
+@media(max-width:820px){.language-composition{grid-column:1/-1}}
+@media(max-width:560px){.language-composition{grid-column:1}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="brand"><span class="brand-name">CodeMap</span></div>
+    <div class="navbar-search">
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <label class="sr-only" for="search">Find in repository</label>
+        <input id="search" class="field search-field" type="search" placeholder="Find files or folders" autocomplete="off">
+        <details class="control-menu filter-menu" id="filter-menu">
+          <summary class="filter-trigger" aria-label="Filters" title="Filters"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M5.5 10h9M8 15h4"/></svg><span class="filter-count" id="filter-count" hidden></span></summary>
+          <div class="control-popover filter-popover">
+            <label class="menu-field"><span>Category</span><select id="category" class="field"><option value="">All categories</option></select></label>
+            <label class="menu-field"><span>Language</span><select id="language" class="field"><option value="">All languages</option></select></label>
+          </div>
+        </details>
+      </div>
+    </div>
+    <div class="segments theme-switch" role="group" aria-label="Theme">
+      <button type="button" data-theme-choice="dark" aria-label="Dark theme" title="Dark" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 15.1A8.7 8.7 0 0 1 8.9 3.6 8.8 8.8 0 1 0 20.4 15.1Z"/></svg></button>
+      <button type="button" data-theme-choice="light" aria-label="Light theme" title="Light" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg></button>
+    </div>
+  </header>
+  <main>
+    <p class="loading-state" id="loading-state" role="status">Loading repository map…</p>
+    <section class="intro" aria-labelledby="page-title">
+      <div class="title-editor" id="title-editor">
+        <h1 id="page-title"><label class="sr-only" for="repo-title">Repository path or folder name</label><input id="repo-title" class="repo-title" type="text" maxlength="512" autocomplete="off" spellcheck="false"></h1>
+        <input id="title-color" class="title-color" type="color" value="#58a6ff" aria-label="Title color" title="Title color" hidden>
+      </div>
+      <div class="summary" id="summary" aria-label="Repository totals"></div>
+    </section>
+    <div class="workspace">
+      <section class="map-panel" aria-label="Repository map">
+        <div class="map-heading">
+          <div class="map-location">
+            <button type="button" class="button up-folder" id="up-folder" aria-label="Go to parent folder" title="Go to parent folder" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m7 7-7-7 7-7"/></svg></button>
+            <p class="repo-location" id="repo-location"></p>
+          </div>
+          <div class="map-tools">
+            <details class="control-menu view-menu" id="view-menu">
+              <summary class="button" aria-label="View options" title="View options"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg></summary>
+              <div class="control-popover view-popover">
+                <label class="menu-field"><span>Rectangle size</span><select id="metric" class="field"><option value="lines">Lines</option><option value="files">File count</option><option value="bytes">Storage</option></select></label>
+                <label class="menu-field"><span>Order</span><select id="sort-mode" class="field"><option value="lines">Most lines</option><option value="size">Largest size</option><option value="hierarchy">Folders first</option><option value="language">Language</option></select></label>
+                <label class="menu-field"><span>Show</span><select id="display-mode" class="field"><option value="all">Everything</option><option value="files">Files only</option><option value="folders">Folders only</option></select></label>
+                <label class="menu-field"><span>Colors</span><select id="color-mode" class="field"><option value="language">Language</option><option value="mono">Monochrome</option></select></label>
+                <div class="visible-depth">
+                  <label class="menu-field"><span>Visible levels</span><div class="depth-control"><input id="depth" type="range" min="1" max="1" value="1" aria-label="Visible levels"><input id="depth-number" class="field" type="number" min="1" max="1" value="1" aria-label="Set visible levels"><output class="depth-value" id="depth-value">of 1</output></div></label>
+                  <small class="depth-note" id="depth-note">Only changes how many levels are drawn.</small>
+                </div>
+              </div>
+            </details>
+            <details class="export-menu" id="export-menu"><summary class="button" aria-label="Export options" title="Export options"><span class="more-icon" aria-hidden="true">···</span></summary><div class="export-options" role="group" aria-label="Export map"><button type="button" id="export-svg">Export SVG</button><button type="button" id="export-png">Export PNG</button></div></details>
+          </div>
+        </div>
+        <div class="map-capture" id="map-capture">
+          <svg id="treemap" role="group" aria-label="Nested repository treemap"></svg>
+          <div class="tile-tooltip" id="tile-tooltip" role="tooltip" hidden></div>
+        </div>
+        <div class="map-foot"><span id="map-total"></span><span id="map-scale"></span></div>
+        <div class="legend" id="legend" aria-label="Languages in this view"></div>
+        <div class="notice" id="scan-notice" hidden></div>
+      </section>
+      <aside class="inspector" aria-labelledby="inspector-heading">
+        <div class="inspector-title"><h2 id="inspector-heading">Properties</h2><span class="kind-label" id="kind-label">Directory</span></div>
+        <h3 class="selected-name" id="selected-name">Repository</h3>
+        <p class="selected-path" id="selected-path"></p>
+        <div class="language-row"><span class="language-chip" id="language-chip"></span><span id="selected-language">Folder mix</span></div>
+        <h3 class="section-heading">Overview</h3>
+        <div class="stats-grid" id="stats-grid"></div>
+        <h3 class="section-heading" id="detail-heading">Folder details</h3>
+        <div class="detail-list" id="detail-list"></div>
+        <details class="language-composition" id="language-composition">
+          <summary><span>Language composition</span><span class="composition-total" id="composition-total"></span></summary>
+          <div class="composition-controls"><label for="composition-metric">Count by</label><select id="composition-metric" class="field"><option value="files">Files</option><option value="lines">Lines</option><option value="bytes">Storage</option></select></div>
+          <div class="composition-list" id="composition-list" role="list"></div>
+        </details>
+        <button type="button" class="button open-folder" id="open-folder" hidden>Open folder</button>
+      </aside>
+    </div>
+  </main>
+</div>
+<div class="status" id="status" role="status" aria-live="polite" hidden></div>
+<p class="sr-only" id="filter-note" aria-live="polite"></p>
+<script type="application/json" id="map-data">__CODEMAP_DATA__</script>
+<script>
+(() => {
+  const loading = document.getElementById("loading-state");
+  let report;
+  try {
+    report = JSON.parse(document.getElementById("map-data").textContent);
+    if (!report.root || (report.root.children !== undefined && !Array.isArray(report.root.children))) throw new Error("Invalid map data.");
+  } catch {
+    loading.textContent = "This map could not be read. Run CodeMap again to create a fresh HTML file.";
+    return;
+  }
+  const originalRoot = report.root;
+  const formatter = new Intl.NumberFormat(undefined, {maximumFractionDigits: 1});
+  const state = {metric: "lines", sortMode: "lines", displayMode: "all", colors: "language", theme: "dark", languageMetric: "files", filteredRoot: originalRoot, focusPath: "", selectedPath: "", titleEdited: false, titleColor: "", legendRoot: null, legendColors: "", legendTheme: "", visibleDepth: 4, expandForFilter: false, renderCount: 0, omitted: 0};
+  const filterCache = new Map();
+  const elements = Object.fromEntries(["summary", "search", "category", "language", "metric", "sort-mode", "display-mode", "depth", "depth-number", "depth-value", "color-mode", "filter-count", "filter-note", "title-editor", "repo-title", "repo-location", "title-color", "up-folder", "map-capture", "treemap", "tile-tooltip", "map-total", "map-scale", "legend", "scan-notice", "kind-label", "selected-name", "selected-path", "language-chip", "selected-language", "stats-grid", "detail-heading", "detail-list", "language-composition", "composition-total", "composition-metric", "composition-list", "open-folder", "status"].map(id => [id.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase()), document.getElementById(id)]));
+  const themeButtons = [...document.querySelectorAll("[data-theme-choice]")];
+  const labelNames = {lines: "Lines", files: "Files", bytes: "Bytes"};
+
+  function visit(node, callback) {
+    callback(node);
+    for (const child of node.children || []) visit(child, callback);
+  }
+
+  const languageCompositionCache = new WeakMap();
+
+  function languageComposition(node) {
+    let composition = languageCompositionCache.get(node);
+    if (composition) return composition;
+    const weights = new Map();
+    visit(node, entry => {
+      if (entry.kind !== "file") return;
+      const name = entry.language || "Unknown";
+      const weight = weights.get(name) || {name, color: entry.color, files: 0, lines: 0, bytes: 0};
+      weight.files += 1;
+      weight.lines += entry.lines;
+      weight.bytes += entry.bytes;
+      weights.set(name, weight);
+    });
+    composition = [...weights.values()];
+    languageCompositionCache.set(node, composition);
+    return composition;
+  }
+
+  function populateFilters() {
+    const categories = new Set();
+    const languages = new Set();
+    visit(originalRoot, node => {
+      if (node.kind !== "file") return;
+      categories.add(node.category);
+      languages.add(node.language);
+      for (const name of node.alternatives || []) languages.add(name);
+    });
+    for (const value of [...categories].sort((a, b) => a.localeCompare(b))) {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = value;
+      elements.category.append(option);
+    }
+    for (const value of [...languages].sort((a, b) => a.localeCompare(b))) {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = value;
+      elements.language.append(option);
+    }
+  }
+
+  function metricValue(node, metric = state.metric) {
+    if (metric === "files") return node.files || 0;
+    if (metric === "bytes") return node.bytes || 0;
+    return node.lines || 0;
+  }
+
+  function cloneForFilter(node, filter) {
+    if (node.kind === "file") {
+      const nameMatch = !filter.query || `${node.name} ${node.path} ${node.language} ${(node.alternatives || []).join(" ")}`.toLocaleLowerCase().includes(filter.query);
+      const categoryMatch = !filter.category || node.category === filter.category;
+      const languageMatch = !filter.language || node.language === filter.language || (node.alternatives || []).includes(filter.language);
+      if (!nameMatch || !categoryMatch || !languageMatch) return null;
+      const totals = new Map([[node.language, {name: node.language, color: node.color, files: 1, lines: node.lines, bytes: node.bytes}]]);
+      return {view: node, totals};
+    }
+    const children = [];
+    const totals = new Map();
+    let bytes = 0;
+    let lines = 0;
+    let nonblankLines = 0;
+    let files = 0;
+    let folders = 0;
+    let directFiles = 0;
+    let directFolders = 0;
+    let nestedLevels = 0;
+    for (const child of node.children || []) {
+      const result = cloneForFilter(child, filter);
+      if (!result) continue;
+      const view = result.view;
+      children.push(view);
+      bytes += view.bytes;
+      lines += view.lines;
+      nonblankLines += view.nonblank_lines;
+      files += view.files;
+      folders += view.folders;
+      nestedLevels = Math.max(nestedLevels, view.depth + view.nested_levels - node.depth);
+      if (view.kind === "file") directFiles += 1;
+      else {
+        directFolders += 1;
+        folders += 1;
+      }
+      for (const [name, value] of result.totals) {
+        const total = totals.get(name) || {name: value.name, color: value.color, files: 0, lines: 0, bytes: 0};
+        total.files += value.files;
+        total.lines += value.lines;
+        total.bytes += value.bytes;
+        totals.set(name, total);
+      }
+    }
+    if (!children.length && (filter.query || filter.category || filter.language)) return null;
+    const view = {...node, children, bytes, lines, nonblank_lines: nonblankLines, files, folders, direct_files: directFiles, direct_folders: directFolders, nested_levels: nestedLevels};
+    view.dominant_by_files = topLanguage(totals, "files");
+    view.dominant_by_lines = topLanguage(totals, "lines");
+    view.dominant_by_bytes = topLanguage(totals, "bytes");
+    return {view, totals};
+  }
+
+  function topLanguage(totals, metric) {
+    let winner = null;
+    for (const value of totals.values()) {
+      if (!winner || value[metric] > winner[metric] || (value[metric] === winner[metric] && value.name.localeCompare(winner.name) > 0)) winner = value;
+    }
+    return winner ? {name: winner.name, color: winner.color} : null;
+  }
+
+  function filteredRoot() {
+    const filter = {query: elements.search.value.trim().toLocaleLowerCase(), category: elements.category.value, language: elements.language.value};
+    const key = `${filter.query}\u0000${filter.category}\u0000${filter.language}`;
+    if (filterCache.has(key)) {
+      const value = filterCache.get(key);
+      filterCache.delete(key);
+      filterCache.set(key, value);
+      return {node: value, filter};
+    }
+    if (!filter.query && !filter.category && !filter.language) return {node: originalRoot, filter};
+    const result = cloneForFilter(originalRoot, filter);
+    const node = result ? result.view : {...originalRoot, children: [], bytes: 0, lines: 0, nonblank_lines: 0, files: 0, folders: 0, direct_files: 0, direct_folders: 0, nested_levels: 0};
+    filterCache.set(key, node);
+    while (filterCache.size > 5) filterCache.delete(filterCache.keys().next().value);
+    return {node, filter};
+  }
+
+  function findPath(root, path) {
+    if (!path) return root;
+    const stack = [root];
+    while (stack.length) {
+      const node = stack.pop();
+      if (node.path === path) return node;
+      for (const child of node.children || []) stack.push(child);
+    }
+    return null;
+  }
+
+  function formatBytes(value) {
+    if (value < 1024) return `${formatter.format(value)} B`;
+    const units = ["KB", "MB", "GB", "TB"];
+    let amount = value;
+    let index = -1;
+    do { amount /= 1024; index += 1; } while (amount >= 1024 && index < units.length - 1);
+    return `${formatter.format(amount)} ${units[index]}`;
+  }
+
+  function formatMetric(value, metric = state.metric) {
+    return metric === "bytes" ? formatBytes(value) : formatter.format(value);
+  }
+
+  function categoryColor(node) {
+    if (node.kind === "directory") {
+      const property = state.metric === "files" ? "dominant_by_files" : state.metric === "bytes" ? "dominant_by_bytes" : "dominant_by_lines";
+      return safeColor((node[property] || {}).color || "#8b949e");
+    }
+    return safeColor(node.color || "#8b949e");
+  }
+
+  function safeColor(value) {
+    return /^#[0-9a-f]{6}$/i.test(value) ? value : "#8b949e";
+  }
+
+  function colorLuminance(value) {
+    const channels = [1, 3, 5].map(index => parseInt(value.slice(index, index + 2), 16) / 255);
+    const linear = channels.map(channel => channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4);
+    return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
+  }
+
+  function languageFill(value) {
+    const color = safeColor(value);
+    const [red, green, blue] = [1, 3, 5].map(index => parseInt(color.slice(index, index + 2), 16) / 255);
+    const maximum = Math.max(red, green, blue);
+    const minimum = Math.min(red, green, blue);
+    const difference = maximum - minimum;
+    let hue = 0;
+    if (difference) {
+      if (maximum === red) hue = 60 * (((green - blue) / difference) % 6);
+      else if (maximum === green) hue = 60 * ((blue - red) / difference + 2);
+      else hue = 60 * ((red - green) / difference + 4);
+    }
+    if (hue < 0) hue += 360;
+    const saturation = state.theme === "light" ? 0.46 : 0.42;
+    const lightness = state.theme === "light" ? 0.88 : 0.29;
+    const channel = offset => {
+      const position = (offset + hue / 30) % 12;
+      const amplitude = saturation * Math.min(lightness, 1 - lightness);
+      return lightness - amplitude * Math.max(-1, Math.min(position - 3, 9 - position, 1));
+    };
+    return `#${[0, 8, 4].map(offset => Math.round(channel(offset) * 255).toString(16).padStart(2, "0")).join("")}`;
+  }
+
+  function tileFill(node, aggregate = false) {
+    if (aggregate) return state.theme === "light" ? "#d8d8d8" : "#4a4a4a";
+    if (state.colors === "mono") return state.theme === "light" ? "#e5e5e5" : "#414141";
+    return languageFill(categoryColor(node));
+  }
+
+  function tileForeground(fill) {
+    return colorLuminance(fill) > 0.42 ? "#1f1f1f" : "#f1f1f1";
+  }
+
+  function escapeXml(value) {
+    return String(value).replace(/[&<>"']/g, character => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&apos;"})[character]);
+  }
+
+  function selectedDescription(node) {
+    const kind = node.kind === "directory" ? "Folder" : node.language;
+    const size = formatBytes(node.bytes);
+    const lines = formatter.format(node.lines);
+    const totals = node.kind === "directory" ? `${formatter.format(node.files)} files · ${formatter.format(node.folders)} folders` : `${lines} lines`;
+    return `${node.name} · ${kind} · ${size} · ${totals}`;
+  }
+
+  function tileDetails(node, folder) {
+    if (folder) return [formatBytes(node.bytes), `${formatter.format(node.lines)} lines · ${formatter.format(node.files)} files`, `${formatter.format(node.folders)} folders inside`];
+    return [`${node.language} · ${formatBytes(node.bytes)}`, `${formatter.format(node.lines)} lines`, `${node.category} · ${node.extension || "no extension"}`];
+  }
+
+  function currentMaxDepth(node) {
+    return Math.max(1, node.nested_levels || 1);
+  }
+
+  function updateDepth(node) {
+    const max = currentMaxDepth(node);
+    elements.depth.max = String(max);
+    elements.depth.value = String(Math.min(state.visibleDepth, max));
+    elements.depthNumber.max = String(max);
+    elements.depthNumber.value = elements.depth.value;
+    elements.depthValue.value = `of ${max}`;
+    elements.depthValue.textContent = elements.depthValue.value;
+  }
+
+  function updateSummary(root) {
+    elements.summary.replaceChildren();
+    const values = [["Files", root.files], ["Folders", root.folders], ["Lines", root.lines], ["Size", formatBytes(root.bytes)]];
+    for (const [label, value] of values) {
+      const item = document.createElement("div");
+      item.className = "summary-item";
+      const number = document.createElement("span");
+      number.className = "summary-value";
+      number.textContent = typeof value === "number" ? formatter.format(value) : value;
+      const caption = document.createElement("span");
+      caption.className = "summary-label";
+      caption.textContent = label;
+      item.append(number, caption);
+      elements.summary.append(item);
+    }
+  }
+
+  function buildTile(node, rect, folder, aggregate = false) {
+    const gap = Math.min(1, rect.w / 4, rect.h / 4);
+    const box = {x: rect.x + gap, y: rect.y + gap, w: Math.max(0, rect.w - gap * 2), h: Math.max(0, rect.h - gap * 2)};
+    const fill = tileFill(node, aggregate);
+    const foreground = tileForeground(fill);
+    const gutter = state.theme === "light" ? "#ededeb" : "#202020";
+    const path = aggregate ? "" : node.path;
+    const label = node.name;
+    const area = Math.max(0, box.w * box.h);
+    const labelWidth = Math.max(0, box.w - 12);
+    const labelFits = box.w >= 65 && box.h >= 24;
+    const detailFits = box.w >= 88 && box.h >= 42;
+    const thirdLineFits = box.w >= 108 && box.h >= 65;
+    const nodeClass = `${aggregate ? "aggregate" : "tile"}${state.selectedPath === path && !aggregate ? " selected" : ""}`;
+    const aria = aggregate ? `${node.name}, ${formatter.format(node.files)} files` : selectedDescription(node);
+    let svg = `<g class="${nodeClass}" style="--tile-foreground:${foreground}"${aggregate ? "" : ` data-path="${escapeXml(path)}" tabindex="-1" role="button" aria-pressed="${state.selectedPath === path}" aria-label="${escapeXml(aria)}"`}><title>${escapeXml(aria)}</title><rect x="${box.x.toFixed(2)}" y="${box.y.toFixed(2)}" width="${box.w.toFixed(2)}" height="${box.h.toFixed(2)}" fill="${fill}" stroke="${gutter}" stroke-width="1.35"/>`;
+    if (labelFits && area > 1500) {
+      const maxCharacters = Math.max(4, Math.floor(labelWidth / 7));
+      const visibleLabel = label.length > maxCharacters ? `${label.slice(0, maxCharacters - 1)}…` : label;
+      svg += `<text class="${folder ? "folder-label" : "tile-label"}" x="${(box.x + 7).toFixed(2)}" y="${(box.y + 16).toFixed(2)}">${escapeXml(visibleLabel)}</text>`;
+      if (detailFits && !aggregate) {
+        const details = tileDetails(node, folder);
+        const visibleLines = thirdLineFits ? details : details.slice(0, 2);
+        for (const [index, detail] of visibleLines.entries()) {
+          const detailLimit = Math.max(5, Math.floor(labelWidth / 5.8));
+          const visibleDetail = detail.length > detailLimit ? `${detail.slice(0, detailLimit - 1)}…` : detail;
+          svg += `<text class="tile-sub" x="${(box.x + 7).toFixed(2)}" y="${(box.y + 31 + index * 12).toFixed(2)}">${escapeXml(visibleDetail)}</text>`;
+        }
+      }
+    }
+    svg += "</g>";
+    return svg;
+  }
+
+  function worstAspect(sum, smallest, largest, shortSide) {
+    if (!sum || shortSide <= 0) return Infinity;
+    return Math.max((shortSide * shortSide * largest) / (sum * sum), (sum * sum) / (shortSide * shortSide * smallest));
+  }
+
+  function squarify(items, bounds) {
+    const weighted = items.map(node => ({node, weight: metricValue(node)})).filter(item => Number.isFinite(item.weight) && item.weight > 0);
+    const total = weighted.reduce((sum, item) => sum + item.weight, 0);
+    const totalArea = bounds.w * bounds.h;
+    if (!weighted.length || !total || !totalArea) return [];
+    for (const item of weighted) item.area = (item.weight / total) * totalArea;
+    const output = [];
+    let index = 0;
+    let rect = {...bounds};
+    while (index < weighted.length && rect.w > 0 && rect.h > 0) {
+      const shortSide = Math.min(rect.w, rect.h);
+      const row = [weighted[index++]];
+      let rowArea = row[0].area;
+      let rowMin = rowArea;
+      let rowMax = rowArea;
+      while (index < weighted.length) {
+        const candidate = weighted[index].area;
+        const nextSum = rowArea + candidate;
+        const nextMin = Math.min(rowMin, candidate);
+        const nextMax = Math.max(rowMax, candidate);
+        if (worstAspect(rowArea, rowMin, rowMax, shortSide) < worstAspect(nextSum, nextMin, nextMax, shortSide)) break;
+        row.push(weighted[index++]);
+        rowArea = nextSum;
+        rowMin = nextMin;
+        rowMax = nextMax;
+      }
+      if (rect.w >= rect.h) {
+        const columnWidth = rowArea / rect.h;
+        let y = rect.y;
+        for (const item of row) {
+          const height = columnWidth > 0 ? item.area / columnWidth : 0;
+          output.push({node: item.node, rect: {x: rect.x, y, w: columnWidth, h: height}});
+          y += height;
+        }
+        rect = {x: rect.x + columnWidth, y: rect.y, w: Math.max(0, rect.w - columnWidth), h: rect.h};
+      } else {
+        const rowHeight = rowArea / rect.w;
+        let x = rect.x;
+        for (const item of row) {
+          const width = rowHeight > 0 ? item.area / rowHeight : 0;
+          output.push({node: item.node, rect: {x, y: rect.y, w: width, h: rowHeight}});
+          x += width;
+        }
+        rect = {x: rect.x, y: rect.y + rowHeight, w: rect.w, h: Math.max(0, rect.h - rowHeight)};
+      }
+    }
+    return output;
+  }
+
+  function aggregateItems(items) {
+    const totals = {name: "Other entries", kind: "aggregate", files: 0, folders: 0, bytes: 0, lines: 0, nonblank_lines: 0, depth: 0, nested_levels: 0};
+    for (const node of items) {
+      totals.files += node.files;
+      totals.folders += node.folders + Number(node.kind === "directory");
+      totals.bytes += node.bytes;
+      totals.lines += node.lines;
+      totals.nonblank_lines += node.nonblank_lines;
+    }
+    return totals;
+  }
+
+  function collectFiles(node, files) {
+    for (const child of node.children || []) {
+      if (child.kind === "file") files.push(child);
+      else collectFiles(child, files);
+    }
+  }
+
+  function dominantLanguage(node) {
+    if (node.kind === "file") return node.language || "Unknown";
+    const property = state.metric === "files" ? "dominant_by_files" : state.metric === "bytes" ? "dominant_by_bytes" : "dominant_by_lines";
+    return (node[property] || {}).name || "Unknown";
+  }
+
+  function compareChildren(a, b) {
+    const byName = a.name.localeCompare(b.name, undefined, {numeric: true, sensitivity: "base"});
+    if (state.sortMode === "lines") return b.lines - a.lines || byName;
+    if (state.sortMode === "size") return b.bytes - a.bytes || byName;
+    if (state.sortMode === "hierarchy") {
+      if (a.kind !== b.kind) return a.kind === "directory" ? -1 : 1;
+      return byName;
+    }
+    return dominantLanguage(a).localeCompare(dominantLanguage(b)) || metricValue(b) - metricValue(a) || byName;
+  }
+
+  function visibleChildren(node) {
+    let children;
+    if (state.displayMode === "files") {
+      children = [];
+      collectFiles(node, children);
+    } else {
+      children = (node.children || []).filter(child => state.displayMode !== "folders" || child.kind === "directory");
+    }
+    children = children.filter(child => metricValue(child) > 0).sort(compareChildren);
+    if (children.length <= state.renderCount) return children;
+    const keepCount = Math.max(0, state.renderCount - 1);
+    const shown = children.slice(0, keepCount);
+    const hidden = children.slice(keepCount);
+    const aggregate = aggregateItems(hidden);
+    state.omitted += hidden.length;
+    shown.push(aggregate);
+    return shown;
+  }
+
+  function renderFolder(node, rect, relativeDepth) {
+    state.renderCount -= 1;
+    let output = buildTile(node, rect, true);
+    const hasUsefulInterior = rect.w >= 100 && rect.h >= 72 && rect.w * rect.h >= 10000;
+    if (relativeDepth >= Number(elements.depth.value) || state.renderCount <= 0 || !hasUsefulInterior) return output;
+    const topPad = Math.min(24, Math.max(16, Math.round(rect.h * 0.2)));
+    const inner = {x: rect.x + 3, y: rect.y + topPad, w: Math.max(0, rect.w - 6), h: Math.max(0, rect.h - topPad - 3)};
+    if (inner.w < 24 || inner.h < 20) return output;
+    const children = visibleChildren(node);
+    for (const item of squarify(children, inner)) {
+      if (state.renderCount <= 0) {
+        if (item.node.kind === "directory") state.omitted += item.node.files + item.node.folders;
+        output += buildTile(item.node, item.rect, item.node.kind === "directory", item.node.kind === "aggregate");
+      } else if (item.node.kind === "directory") output += renderFolder(item.node, item.rect, relativeDepth + 1);
+      else {
+        state.renderCount -= 1;
+        output += buildTile(item.node, item.rect, false);
+      }
+    }
+    return output;
+  }
+
+  function updateMap(root, focus) {
+    const box = elements.treemap.getBoundingClientRect();
+    const width = Math.max(320, Math.floor(box.width));
+    const height = Math.max(260, Math.floor(box.height));
+    state.renderCount = 7000;
+    state.omitted = 0;
+    const children = visibleChildren(focus);
+    const shapes = [];
+    for (const item of squarify(children, {x: 1, y: 1, w: width - 2, h: height - 2})) {
+      if (state.renderCount <= 0) {
+        if (item.node.kind === "directory") state.omitted += item.node.files + item.node.folders;
+        shapes.push(buildTile(item.node, item.rect, item.node.kind === "directory", item.node.kind === "aggregate"));
+      } else if (item.node.kind === "directory") shapes.push(renderFolder(item.node, item.rect, 1));
+      else {
+        state.renderCount -= 1;
+        shapes.push(buildTile(item.node, item.rect, false, item.node.kind === "aggregate"));
+      }
+    }
+    const hasFilters = Boolean(elements.search.value.trim() || elements.category.value || elements.language.value);
+    const emptyMessage = root.files === 0
+      ? (hasFilters ? "No files match. Change the filters or clear the search." : "No files were found. Check the repository path or scan a folder with files.")
+      : "Nothing to show at this size. Try another rectangle size or view.";
+    const emptyText = !shapes.length ? `<text class="empty-map" x="${width / 2}" y="${height / 2}" text-anchor="middle">${escapeXml(emptyMessage)}</text>` : "";
+    const background = getComputedStyle(document.documentElement).getPropertyValue("--canvas").trim() || "#0b0e12";
+    elements.treemap.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    elements.treemap.setAttribute("preserveAspectRatio", "none");
+    elements.treemap.innerHTML = `<rect x="0" y="0" width="${width}" height="${height}" fill="${background}"/><g>${shapes.join("")}</g>${emptyText}`;
+    updateRovingTabIndex(state.selectedPath);
+    const rendered = Math.max(0, 7000 - state.renderCount);
+    elements.mapTotal.textContent = `${formatter.format(root.files)} files · ${formatter.format(root.folders)} folders · ${formatter.format(root.lines)} lines · ${formatBytes(root.bytes)}`;
+    elements.mapScale.textContent = state.omitted ? "Some items grouped for display" : `${formatter.format(rendered)} items shown`;
+    elements.filterNote.textContent = state.omitted ? `Large branches are grouped; totals still include every scanned file.` : `${formatter.format(root.files)} files in this view`;
+  }
+
+  function appendStat(label, value) {
+    const stat = document.createElement("div");
+    stat.className = "stat";
+    const amount = document.createElement("span");
+    amount.className = "stat-value";
+    amount.textContent = value;
+    const caption = document.createElement("span");
+    caption.className = "stat-label";
+    caption.textContent = label;
+    stat.append(amount, caption);
+    elements.statsGrid.append(stat);
+  }
+
+  function appendDetail(label, value) {
+    const row = document.createElement("div");
+    row.className = "detail-row";
+    const term = document.createElement("span");
+    term.textContent = label;
+    const detail = document.createElement("strong");
+    detail.textContent = value;
+    row.append(term, detail);
+    elements.detailList.append(row);
+  }
+
+  function updateLanguageComposition(node) {
+    const visible = node.kind === "directory";
+    elements.languageComposition.hidden = !visible;
+    if (!visible) return;
+    const metric = state.languageMetric;
+    const entries = [...languageComposition(node)].sort((a, b) => b[metric] - a[metric] || a.name.localeCompare(b.name));
+    const total = entries.reduce((sum, entry) => sum + entry[metric], 0);
+    elements.compositionTotal.textContent = `${formatter.format(entries.length)} ${entries.length === 1 ? "language" : "languages"}`;
+    elements.compositionMetric.value = metric;
+    elements.compositionList.replaceChildren();
+    if (!entries.length) {
+      const empty = document.createElement("div");
+      empty.className = "composition-empty";
+      empty.textContent = "No language data in this folder.";
+      elements.compositionList.append(empty);
+      return;
+    }
+    for (const entry of entries) {
+      const share = total ? entry[metric] / total * 100 : 0;
+      const color = state.colors === "mono" ? "var(--muted)" : languageFill(entry.color || "#8b949e");
+      const row = document.createElement("div");
+      row.className = "composition-row";
+      row.setAttribute("role", "listitem");
+      row.style.setProperty("--language-color", color);
+      const language = document.createElement("span");
+      language.className = "composition-language";
+      const swatch = document.createElement("i");
+      swatch.className = "composition-swatch";
+      const name = document.createElement("span");
+      name.textContent = entry.name;
+      language.append(swatch, name);
+      const value = document.createElement("span");
+      value.className = "composition-value";
+      value.textContent = `${metric === "bytes" ? formatBytes(entry[metric]) : formatter.format(entry[metric])} · ${formatter.format(share)}%`;
+      const track = document.createElement("span");
+      track.className = "composition-track";
+      track.setAttribute("aria-hidden", "true");
+      const fill = document.createElement("i");
+      fill.className = "composition-fill";
+      fill.style.width = `${share}%`;
+      track.append(fill);
+      row.append(language, value, track);
+      elements.compositionList.append(row);
+    }
+  }
+
+  function updateInspector(node) {
+    elements.kindLabel.textContent = node.kind === "directory" ? "Folder" : "File";
+    elements.selectedName.textContent = node.name || report.root.name;
+    elements.selectedPath.textContent = node.path || report.root.name;
+    elements.detailHeading.textContent = node.kind === "directory" ? "Folder contents" : "File details";
+    updateLanguageComposition(node);
+    const dominantProperty = state.metric === "files" ? "dominant_by_files" : state.metric === "bytes" ? "dominant_by_bytes" : "dominant_by_lines";
+    const dominant = node.kind === "directory" ? node[dominantProperty] : {name: node.language, color: node.color};
+    elements.languageChip.style.backgroundColor = state.colors === "mono" ? tileFill(node) : languageFill((dominant || {}).color || node.color || "#8b949e");
+    elements.selectedLanguage.textContent = node.kind === "directory" ? (dominant ? `Largest share: ${dominant.name}` : "No classified files") : `${node.language} · ${node.category}`;
+    elements.statsGrid.replaceChildren();
+    appendStat("Bytes", formatBytes(node.bytes));
+    appendStat("Lines", formatter.format(node.lines));
+    appendStat("Nonblank lines", formatter.format(node.nonblank_lines));
+    appendStat("Files", formatter.format(node.files));
+    elements.detailList.replaceChildren();
+    if (node.kind === "directory") {
+      appendDetail("Direct files", formatter.format(node.direct_files));
+      appendDetail("Direct folders", formatter.format(node.direct_folders));
+      appendDetail("Folders inside", formatter.format(node.folders));
+      appendDetail("Nested levels", formatter.format(node.nested_levels));
+      if (node.truncated) appendDetail("Scan boundary", "Depth limit reached");
+      elements.openFolder.hidden = !node.path;
+      elements.openFolder.dataset.path = node.path;
+    } else {
+      appendDetail("Extension", node.extension || "No extension");
+      appendDetail("Category", node.category);
+      if (node.alternatives && node.alternatives.length) appendDetail("Also classified as", node.alternatives.join(", "));
+      elements.openFolder.hidden = true;
+    }
+  }
+
+  let tooltipTile = null;
+
+  function showTileTooltip(node, point, tile) {
+    if (tooltipTile !== tile) {
+      if (tooltipTile) tooltipTile.removeAttribute("aria-describedby");
+      tooltipTile = tile;
+      tooltipTile.setAttribute("aria-describedby", "tile-tooltip");
+    }
+    if (elements.tileTooltip.dataset.path !== node.path) {
+      elements.tileTooltip.replaceChildren();
+      const name = document.createElement("strong");
+      name.className = "tile-tooltip-name";
+      name.textContent = node.name || report.root.name;
+      const path = document.createElement("span");
+      path.className = "tile-tooltip-path";
+      path.textContent = node.path || report.root.name;
+      const grid = document.createElement("div");
+      grid.className = "tile-tooltip-grid";
+      const values = [["Size", formatBytes(node.bytes)], ["Lines", formatter.format(node.lines)], ["Nonblank", formatter.format(node.nonblank_lines)], ["Files", formatter.format(node.files)]];
+      if (node.kind === "directory") values.push(["Folders", formatter.format(node.folders)]);
+      values.push(["Language", node.kind === "directory" ? dominantLanguage(node) : node.language]);
+      for (const [label, value] of values) {
+        const term = document.createElement("span");
+        term.textContent = label;
+        const detail = document.createElement("strong");
+        detail.textContent = value;
+        grid.append(term, detail);
+      }
+      elements.tileTooltip.append(name, path, grid);
+      elements.tileTooltip.dataset.path = node.path;
+    }
+    elements.tileTooltip.hidden = false;
+    const bounds = elements.mapCapture.getBoundingClientRect();
+    const width = elements.tileTooltip.offsetWidth;
+    const height = elements.tileTooltip.offsetHeight;
+    const left = Math.max(8, Math.min(point.clientX - bounds.left + 14, bounds.width - width - 8));
+    const nextTop = point.clientY - bounds.top + 14;
+    const top = nextTop + height <= bounds.height - 8 ? nextTop : Math.max(8, point.clientY - bounds.top - height - 14);
+    elements.tileTooltip.style.left = `${left}px`;
+    elements.tileTooltip.style.top = `${top}px`;
+  }
+
+  function hideTileTooltip() {
+    elements.tileTooltip.hidden = true;
+    if (tooltipTile) tooltipTile.removeAttribute("aria-describedby");
+    tooltipTile = null;
+  }
+
+  function makeLegend(root) {
+    elements.legend.replaceChildren();
+    if (state.colors === "mono") {
+      const item = document.createElement("span");
+      item.className = "legend-item";
+      item.textContent = "Monochrome map";
+      elements.legend.append(item);
+      return;
+    }
+    const weights = new Map();
+    visit(root, node => {
+      if (node.kind !== "file") return;
+      const weight = weights.get(node.language) || {name: node.language, color: node.color, files: 0};
+      weight.files += 1;
+      weights.set(node.language, weight);
+    });
+    const ranked = [...weights.values()].sort((a, b) => b.files - a.files || a.name.localeCompare(b.name));
+    const top = ranked.slice(0, 10);
+    for (const entry of top) {
+      const item = document.createElement("span");
+      item.className = "legend-item";
+      const dot = document.createElement("i");
+      dot.className = "legend-dot";
+      dot.style.color = languageFill(entry.color);
+      const name = document.createElement("span");
+      name.textContent = entry.name;
+      item.append(dot, name);
+      elements.legend.append(item);
+    }
+    if (ranked.length > top.length) {
+      const more = document.createElement("span");
+      more.className = "legend-more";
+      more.textContent = `+${ranked.length - top.length}`;
+      more.title = ranked.slice(top.length).map(entry => entry.name).join(", ");
+      more.setAttribute("aria-label", `${ranked.length - top.length} more languages`);
+      elements.legend.append(more);
+    }
+  }
+
+  function draw() {
+    hideTileTooltip();
+    const {node: root, filter} = filteredRoot();
+    state.filteredRoot = root;
+    let focus = findPath(root, state.focusPath);
+    if (!focus || focus.kind !== "directory") {
+      state.focusPath = "";
+      focus = root;
+    }
+    let selected = findPath(root, state.selectedPath) || focus;
+    if (!selected) selected = root;
+    state.selectedPath = selected.path;
+    updateTitle(focus);
+    document.documentElement.dataset.theme = state.theme;
+    elements.metric.value = state.metric;
+    elements.sortMode.value = state.sortMode;
+    elements.displayMode.value = state.displayMode;
+    elements.colorMode.value = state.colors;
+    for (const button of themeButtons) button.setAttribute("aria-pressed", String(button.dataset.themeChoice === state.theme));
+    updateSummary(root);
+    updateDepth(focus);
+    if (state.expandForFilter && root.files > 0) {
+      state.visibleDepth = currentMaxDepth(focus);
+      elements.depth.value = String(state.visibleDepth);
+      elements.depthNumber.value = elements.depth.value;
+    }
+    elements.depthValue.value = `of ${elements.depth.max}`;
+    elements.depthValue.textContent = elements.depthValue.value;
+    state.expandForFilter = false;
+    updateMap(root, focus);
+    updateInspector(selected);
+    if (state.legendRoot !== focus || state.legendColors !== state.colors || state.legendTheme !== state.theme) {
+      makeLegend(focus);
+      state.legendRoot = focus;
+      state.legendColors = state.colors;
+      state.legendTheme = state.theme;
+    }
+    const activeFilters = Number(Boolean(filter.query)) + Number(Boolean(filter.category)) + Number(Boolean(filter.language));
+    const menuFilters = Number(Boolean(filter.category)) + Number(Boolean(filter.language));
+    elements.filterCount.textContent = String(menuFilters);
+    elements.filterCount.hidden = menuFilters === 0;
+    if (!activeFilters) elements.filterNote.textContent = `${formatter.format(root.files)} files in this view`;
+    else elements.filterNote.textContent = `${formatter.format(root.files)} ${root.files === 1 ? "file matches" : "files match"}`;
+  }
+
+  function updateTitle(focus) {
+    if (state.titlePath !== focus.path) {
+      state.titlePath = focus.path;
+      state.titleEdited = false;
+    }
+    if (!state.titleEdited) elements.repoTitle.value = focus.name || report.root.name;
+    elements.repoTitle.style.color = state.titleColor || "";
+    elements.repoLocation.textContent = focus.path || report.root.name;
+    elements.upFolder.hidden = !focus.path;
+    document.title = `${elements.repoTitle.value || report.root.name} · CodeMap`;
+  }
+
+  function selectTile(path) {
+    const node = findPath(state.filteredRoot, path);
+    if (!node) return;
+    state.selectedPath = path;
+    updateInspector(node);
+    for (const tile of elements.treemap.querySelectorAll("[data-path]")) {
+      const selected = tile.dataset.path === path;
+      tile.classList.toggle("selected", selected);
+      tile.setAttribute("aria-pressed", String(selected));
+    }
+    updateRovingTabIndex(path);
+  }
+
+  function updateRovingTabIndex(path) {
+    const tiles = [...elements.treemap.querySelectorAll("[data-path]")];
+    const target = tiles.find(tile => tile.dataset.path === path) || tiles[0];
+    for (const tile of tiles) tile.setAttribute("tabindex", tile === target ? "0" : "-1");
+  }
+
+  function notify(message) {
+    elements.status.textContent = message;
+    elements.status.hidden = false;
+    clearTimeout(notify.timer);
+    notify.timer = setTimeout(() => { elements.status.hidden = true; }, 2600);
+  }
+
+  function exportSvgDocument() {
+    const copy = elements.treemap.cloneNode(true);
+    const viewBox = copy.viewBox.baseVal;
+    const width = viewBox.width;
+    const height = viewBox.height + 46;
+    copy.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    copy.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    copy.setAttribute("width", String(width));
+    copy.setAttribute("height", String(height));
+    const style = document.createElementNS("http://www.w3.org/2000/svg", "style");
+    const textColor = getComputedStyle(document.documentElement).getPropertyValue("--text").trim();
+    const mutedColor = getComputedStyle(document.documentElement).getPropertyValue("--muted").trim();
+    const selectedColor = getComputedStyle(document.documentElement).getPropertyValue("--selected").trim();
+    const panelColor = getComputedStyle(document.documentElement).getPropertyValue("--panel").trim();
+    style.textContent = `.tile-label,.folder-label{fill:var(--tile-foreground,${textColor});font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;font-weight:600}.folder-label{font-size:10px;font-weight:700}.tile-sub{fill:var(--tile-foreground,${mutedColor});opacity:.82;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:9px}.empty-map{fill:${mutedColor};font:13px ui-sans-serif,system-ui,sans-serif}.tile.selected rect{stroke:${selectedColor};stroke-width:2px}`;
+    copy.prepend(style);
+    const content = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    content.setAttribute("transform", "translate(0 46)");
+    for (const child of [...copy.children]) {
+      if (child !== style) content.append(child);
+    }
+    const headingBackground = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    headingBackground.setAttribute("width", String(width));
+    headingBackground.setAttribute("height", "46");
+    headingBackground.setAttribute("fill", panelColor);
+    const caption = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    caption.setAttribute("x", "15");
+    caption.setAttribute("y", "32");
+    caption.setAttribute("fill", state.titleColor || textColor);
+    caption.setAttribute("font-family", "ui-sans-serif, system-ui, sans-serif");
+    caption.setAttribute("font-size", "24");
+    caption.setAttribute("font-weight", "650");
+    caption.textContent = elements.repoTitle.value || report.root.name;
+    copy.append(headingBackground, caption, content);
+    const source = new XMLSerializer().serializeToString(copy);
+    return {source, width, height};
+  }
+
+  function download(filename, blob) {
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = filename;
+    document.body.append(anchor);
+    anchor.click();
+    anchor.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function exportSvg() {
+    const {source} = exportSvgDocument();
+    download(`${safeDownloadName()}-map.svg`, new Blob([source], {type: "image/svg+xml;charset=utf-8"}));
+    notify("SVG map exported.");
+  }
+
+  function safeDownloadName() {
+    const label = elements.repoTitle.value.split(/[\\/]/).filter(Boolean).at(-1) || "repository";
+    return label.toLocaleLowerCase().replace(/[^a-z0-9_-]+/g, "-").replace(/^-+|-+$/g, "") || "repository";
+  }
+
+  function exportPng() {
+    const {source, width, height} = exportSvgDocument();
+    const url = URL.createObjectURL(new Blob([source], {type: "image/svg+xml;charset=utf-8"}));
+    const image = new Image();
+    image.onload = () => {
+      try {
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(width * 2));
+        canvas.height = Math.max(1, Math.round(height * 2));
+        const context = canvas.getContext("2d");
+        if (!context) throw new Error("Canvas is unavailable in this browser.");
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(blob => {
+          URL.revokeObjectURL(url);
+          if (!blob) {
+            notify("PNG export failed. Try SVG export instead.");
+            return;
+          }
+          download(`${safeDownloadName()}-map.png`, blob);
+          notify("PNG map exported.");
+        }, "image/png");
+      } catch (error) {
+        URL.revokeObjectURL(url);
+        notify(error instanceof Error ? error.message : "PNG export failed. Try SVG export instead.");
+      }
+    };
+    image.onerror = () => {
+      URL.revokeObjectURL(url);
+      notify("PNG export failed. Try SVG export instead.");
+    };
+    image.src = url;
+  }
+
+  function focusDirectory(path) {
+    state.focusPath = path;
+    state.selectedPath = path;
+    draw();
+  }
+
+  function parentPath(path) {
+    const separator = path.includes("\\") && !path.includes("/") ? "\\" : "/";
+    const index = path.lastIndexOf(separator);
+    return index < 0 ? "" : path.slice(0, index);
+  }
+
+  let searchTimer;
+  elements.search.addEventListener("input", () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => { state.focusPath = ""; state.expandForFilter = true; draw(); }, 160);
+  });
+  elements.category.addEventListener("change", () => { state.focusPath = ""; state.expandForFilter = true; draw(); });
+  elements.language.addEventListener("change", () => { state.focusPath = ""; state.expandForFilter = true; draw(); });
+  elements.depth.addEventListener("input", () => { state.visibleDepth = Number(elements.depth.value) || 1; state.expandForFilter = false; draw(); });
+  elements.depthNumber.addEventListener("change", () => {
+    const max = Number(elements.depthNumber.max) || 1;
+    state.visibleDepth = Math.max(1, Math.min(Number(elements.depthNumber.value) || 1, max));
+    state.expandForFilter = false;
+    draw();
+  });
+  elements.metric.addEventListener("change", () => { state.metric = elements.metric.value; draw(); });
+  elements.sortMode.addEventListener("change", () => { state.sortMode = elements.sortMode.value; draw(); });
+  elements.displayMode.addEventListener("change", () => { state.displayMode = elements.displayMode.value; draw(); });
+  elements.colorMode.addEventListener("change", () => { state.colors = elements.colorMode.value; draw(); });
+  elements.compositionMetric.addEventListener("change", () => {
+    state.languageMetric = elements.compositionMetric.value;
+    const selected = findPath(state.filteredRoot, state.selectedPath) || state.filteredRoot;
+    updateInspector(selected);
+  });
+  for (const button of themeButtons) {
+    button.addEventListener("click", () => { state.theme = button.dataset.themeChoice; draw(); });
+  }
+  elements.treemap.addEventListener("click", event => {
+    const tile = event.target.closest("[data-path]");
+    if (tile) selectTile(tile.dataset.path);
+  });
+  elements.treemap.addEventListener("pointermove", event => {
+    if (event.pointerType === "touch") {
+      hideTileTooltip();
+      return;
+    }
+    const tile = event.target.closest("[data-path]");
+    const node = tile && findPath(state.filteredRoot, tile.dataset.path);
+    if (node) showTileTooltip(node, event, tile);
+    else hideTileTooltip();
+  });
+  elements.treemap.addEventListener("pointerleave", hideTileTooltip);
+  elements.treemap.addEventListener("focusin", event => {
+    const tile = event.target.closest("[data-path]");
+    const node = tile && findPath(state.filteredRoot, tile.dataset.path);
+    if (!node || !tile) return;
+    const bounds = tile.getBoundingClientRect();
+    showTileTooltip(node, {clientX: bounds.left + bounds.width / 2, clientY: bounds.top + bounds.height / 2}, tile);
+  });
+  elements.treemap.addEventListener("focusout", hideTileTooltip);
+  elements.treemap.addEventListener("dblclick", event => {
+    const tile = event.target.closest("[data-path]");
+    const node = tile && findPath(state.filteredRoot, tile.dataset.path);
+    if (node && node.kind === "directory") focusDirectory(node.path);
+  });
+  elements.treemap.addEventListener("keydown", event => {
+    const tile = event.target.closest("[data-path]");
+    if (tile && ["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp"].includes(event.key)) {
+      const tiles = [...elements.treemap.querySelectorAll("[data-path]")];
+      const index = tiles.indexOf(tile);
+      const direction = event.key === "ArrowRight" || event.key === "ArrowDown" ? 1 : -1;
+      const next = tiles[(index + direction + tiles.length) % tiles.length];
+      if (next) {
+        event.preventDefault();
+        updateRovingTabIndex(next.dataset.path);
+        next.focus();
+      }
+    } else if (tile && (event.key === "Enter" || event.key === " ")) {
+      event.preventDefault();
+      if (event.key === "Enter" && event.shiftKey) focusDirectory(tile.dataset.path);
+      else selectTile(tile.dataset.path);
+    }
+  });
+  elements.upFolder.addEventListener("click", () => {
+    if (state.focusPath) focusDirectory(parentPath(state.focusPath));
+  });
+  elements.openFolder.addEventListener("click", () => focusDirectory(elements.openFolder.dataset.path));
+  const controlMenus = [...document.querySelectorAll(".control-menu")];
+  document.addEventListener("click", event => {
+    for (const menu of controlMenus) {
+      if (menu.open && !menu.contains(event.target)) menu.open = false;
+    }
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key !== "Escape") return;
+    const menu = [...controlMenus].reverse().find(item => item.open);
+    if (!menu) return;
+    menu.open = false;
+    menu.querySelector("summary").focus();
+  });
+  const exportMenu = document.getElementById("export-menu");
+  document.getElementById("export-svg").addEventListener("click", event => {
+    exportSvg();
+    exportMenu.open = false;
+    if (event.detail === 0) exportMenu.querySelector("summary").focus();
+  });
+  document.getElementById("export-png").addEventListener("click", event => {
+    exportPng();
+    exportMenu.open = false;
+    if (event.detail === 0) exportMenu.querySelector("summary").focus();
+  });
+  document.addEventListener("click", event => {
+    if (exportMenu.open && !exportMenu.contains(event.target)) exportMenu.open = false;
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && exportMenu.open) {
+      exportMenu.open = false;
+      exportMenu.querySelector("summary").focus();
+    }
+  });
+  elements.repoTitle.addEventListener("focus", () => { elements.titleColor.hidden = false; });
+  elements.repoTitle.addEventListener("input", () => {
+    state.titleEdited = true;
+    document.title = `${elements.repoTitle.value || report.root.name} · CodeMap`;
+  });
+  elements.titleEditor.addEventListener("focusout", event => {
+    if (!elements.titleEditor.contains(event.relatedTarget)) elements.titleColor.hidden = true;
+  });
+  elements.titleColor.addEventListener("input", () => {
+    state.titleColor = safeColor(elements.titleColor.value);
+    elements.repoTitle.style.color = state.titleColor;
+  });
+
+  function showScanNotice() {
+    const truncated = [];
+    visit(originalRoot, node => { if (node.truncated) truncated.push(node.path || node.name); });
+    const reasons = [];
+    if (report.scan_depth) reasons.push(`Scan depth is capped at ${report.scan_depth} levels.`);
+    if (report.skipped_symlinks) reasons.push(`${formatter.format(report.skipped_symlinks)} symbolic links were skipped.`);
+    if (truncated.length) reasons.push("Some folders reached the scan boundary; raise --depth and scan again to include their contents.");
+    if (reasons.length) {
+      elements.scanNotice.hidden = false;
+      elements.scanNotice.textContent = reasons.join(" ");
+    }
+  }
+
+  populateFilters();
+  elements.titleColor.value = "#58a6ff";
+  showScanNotice();
+  draw();
+  loading.hidden = true;
+  new ResizeObserver(() => draw()).observe(elements.mapCapture);
+})();
+</script>
+</body>
+</html>
