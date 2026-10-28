@@ -1,0 +1,64 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest,    target: x86_64-unknown-linux-gnu,  artifact: linux-amd64 }
+          - { os: ubuntu-24.04-arm, target: aarch64-unknown-linux-gnu, artifact: linux-arm64 }
+          - { os: windows-latest,   target: x86_64-pc-windows-msvc,    artifact: windows-amd64 }
+          - { os: windows-latest,   target: aarch64-pc-windows-msvc,   artifact: windows-arm64 }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Build
+        run: cargo build --release --target ${{ matrix.target }}
+
+      - name: Stage artifact
+        shell: bash
+        run: |
+          mkdir -p dist
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            cp "target/${{ matrix.target }}/release/codemap.exe" "dist/codemap-${{ matrix.artifact }}.exe"
+          else
+            cp "target/${{ matrix.target }}/release/codemap" "dist/codemap-${{ matrix.artifact }}"
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: codemap-${{ matrix.artifact }}
+          path: dist/
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/* \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "$GITHUB_REF_NAME" \
+            --notes "First release. Scan any local repository into a single self-contained HTML treemap — files, folders, code size, and language distribution.
+
+          Binaries for Linux and Windows (amd64/arm64). No server required — the output is one HTML file you can open anywhere."
